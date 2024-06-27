@@ -1,5 +1,3 @@
-import "video-react/dist/video-react.css";
-import "./customVideoStyles.css";
 import { Box, createStyles } from "@mantine/core";
 import React, { memo, useState } from "react";
 import ReactPlayer from "react-player";

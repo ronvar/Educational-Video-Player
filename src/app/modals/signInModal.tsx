@@ -2,6 +2,8 @@ import { useAtom } from "jotai";
 import { userIdAtom } from "../atoms/userAtoms";
 import { useCallback, useEffect, useState } from "react";
 import { Button, Modal, Stack, TextInput } from "@mantine/core";
+import { getHotkeyHandler, useHotkeys } from "@mantine/hooks";
+import { get } from "http";
 
 const SignInModal = () => {
   const [userId, setUserId] = useAtom(userIdAtom);
@@ -45,7 +47,7 @@ const SignInModal = () => {
     } else {
       setUserId(`${firstName.toLowerCase()}_${lastName.toLowerCase()}`);
     }
-  }, [firstName, lastName]);
+  }, [firstName, lastName, setUserId]);
 
   const onClose = useCallback(() => {
     setFirstName("");
@@ -78,6 +80,7 @@ const SignInModal = () => {
           placeholder="Enter your first name"
           value={firstName}
           onChange={onFirstNameChange}
+          onKeyDown={getHotkeyHandler([["Enter", onSubmit]])}
           required
         />
         <TextInput
@@ -85,6 +88,7 @@ const SignInModal = () => {
           placeholder="Enter your last name"
           value={lastName}
           onChange={onLastNameChange}
+          onKeyDown={getHotkeyHandler([["Enter", onSubmit]])}
           required
         />
         <Button onClick={onSubmit}>Sign In</Button>

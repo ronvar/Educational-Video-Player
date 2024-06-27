@@ -74,13 +74,13 @@ const useUserVideos = (fetchData?: boolean) => {
     return false;
   }, [fetchUserVideos, userId]);
 
-  const addUserComment = useCallback(async (videoId: string, content: string) => {
+  const addUserComment = useCallback(async (videoId: string, content: string, commentUserId?: string) => {
     const cleanedComment = profanityCheck.clean(content);
     if (!cleanedComment || !selectedUserVideo) {
       return;
     }
 
-    const success = await createComment(videoId, cleanedComment, userId);
+    const success = await createComment(videoId, cleanedComment, commentUserId || userId);
     if (success) {
       fetchVideoComments(videoId);
       fetchUserVideos();
