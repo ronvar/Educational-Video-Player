@@ -25,7 +25,7 @@ const useStyles = createStyles(() => ({
     height: "100%",
     zIndex: 2,
     backgroundColor: "transparent",
-    cursor: "default",
+    cursor: "pointer",
   }
 }));
 

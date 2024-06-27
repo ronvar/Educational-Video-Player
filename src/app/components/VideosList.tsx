@@ -14,6 +14,7 @@ import { FetchedVideoType } from "@/types/apiResponses.types";
 import CreateNewVideoModal from "../modals/createNewVideoModal";
 import { useCallback, useState } from "react";
 import { IconUpload } from "@tabler/icons-react";
+import useScreenSize from "../hooks/useScreenSize";
 
 const useStyles = createStyles((theme) => {
   const primaryColor = theme.colors.blue[6];
@@ -35,6 +36,7 @@ const useStyles = createStyles((theme) => {
 
 const VideosList = () => {
   const { classes } = useStyles();
+  const { isMobile, isTablet } = useScreenSize();
   const { userVideos, setSelectedUserVideo } = useUserVideos();
   const [createNewVideoModalOpened, setCreateNewVideoModalOpened] =
     useState(false);
@@ -50,6 +52,8 @@ const VideosList = () => {
   const onUploadNewVideo = useCallback(() => {
     setCreateNewVideoModalOpened(true);
   }, []);
+
+  const numColumns = isMobile ? 1 : isTablet ? 2 : 3;
 
   return (
     <Box w={"100%"} h={"100%"} p={"md"}>
@@ -67,7 +71,7 @@ const VideosList = () => {
         </Button>
       </Group>
       <ScrollArea.Autosize mah={"calc(100vh - 230px)"} w={"100%"}>
-        <SimpleGrid cols={2} spacing={"md"}>
+        <SimpleGrid cols={numColumns} spacing={"md"}>
           {userVideos.map((video) => (
             <VideoCell key={video.id} video={video} onClick={onVideoClick} />
           ))}
