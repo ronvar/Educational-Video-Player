@@ -110,9 +110,9 @@ const CreateNewVideoModal: React.FC<CreateNewVideoModalProps> = ({
     );
 
     if (success) {
-      setSuccess("Video created successfully");
+      setSuccess("Video created successfully!");
     } else {
-      setError("Failed to create video. Please try again");
+      setError("Failed to create video. Please try again.");
     }
 
     setLoading(false);
@@ -162,16 +162,18 @@ const CreateNewVideoModal: React.FC<CreateNewVideoModalProps> = ({
             Create Video
           </Button>
         </Group>
-        {error && (
-          <Text color="red" style={{ marginTop: theme.spacing.xs }}>
-            {error}
-          </Text>
-        )}
-        {success && (
-          <Text color="green" style={{ marginTop: theme.spacing.xs }}>
-            {success}
-          </Text>
-        )}
+        <Group w={"100%"} position="center">
+            {error && (
+            <Text color="red.3" style={{ marginTop: theme.spacing.xs }}>
+                {error}
+            </Text>
+            )}
+            {success && (
+            <Text color="green.4" style={{ marginTop: theme.spacing.xs }}>
+                {success}
+            </Text>
+            )}
+        </Group>
       </Stack>
     </Modal>
   );
