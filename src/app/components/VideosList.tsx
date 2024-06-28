@@ -1,10 +1,12 @@
 import {
   Box,
   Button,
+  Center,
   Group,
   ScrollArea,
   SimpleGrid,
   Stack,
+  Text,
   createStyles,
   useMantineTheme,
 } from "@mantine/core";
@@ -37,7 +39,8 @@ const useStyles = createStyles((theme) => {
 const VideosList = () => {
   const { classes } = useStyles();
   const { isMobile, isTablet } = useScreenSize();
-  const { userVideos, setSelectedUserVideo } = useUserVideos();
+  const { userVideos, loadingUserVideos, setSelectedUserVideo } =
+    useUserVideos();
   const [createNewVideoModalOpened, setCreateNewVideoModalOpened] =
     useState(false);
 
@@ -70,6 +73,18 @@ const VideosList = () => {
           Create New Video
         </Button>
       </Group>
+      {!loadingUserVideos && !userVideos.length && (
+        <Center h={"60vh"}>
+          <Stack justify="center" align="center">
+            <Text size={36} weight={600}>
+              Oops, you dont have any videos yet!
+            </Text>
+            <Text size={18} color="gray">
+              Click the button above to upload your first video
+            </Text>
+          </Stack>
+        </Center>
+      )}
       <ScrollArea.Autosize mah={"calc(100vh - 230px)"} w={"100%"}>
         <SimpleGrid cols={numColumns} spacing={"md"}>
           {userVideos.map((video) => (

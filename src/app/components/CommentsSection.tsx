@@ -18,10 +18,17 @@ type CommentsSectionProps = {
   comments: FetchedVideoCommentType[] | null;
 };
 
+const useStyles = createStyles((theme) => ({
+  grid: {
+    borderBottom: `1px solid ${theme.colors.gray[3]}`,
+  },
+}));
+
 const CommentsSection: React.FC<CommentsSectionProps> = ({
   videoId,
   comments,
 }) => {
+  const { classes } = useStyles();
   const { userId, addUserComment } = useUserVideos();
   const [newComment, setNewComment] = React.useState("");
   const [commentUserId, setCommentUserId] = React.useState<string>("");
@@ -69,7 +76,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({
   return (
     <Box w={"100%"}>
       <Stack spacing={"xs"}>
-        <Grid gutter={"xs"}>
+        <Grid className={classes.grid} gutter={"xs"}>
           <Grid.Col span={3}>
             <Textarea
               placeholder={`Username: ${userId}`}
